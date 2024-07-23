@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capstone Portal Registration</title>
+  <link rel="icon" href="logo1.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      width: 100%;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    .team-members {
+      display: none;
+    }
+    .team-members.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Capstone Portal Registration</h2>
+    <form id="registration-form" method="post" action="/register">
+      <!-- <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="enrollment-number">Enrollment Number:</label>
+      <input type="text" id="enrollment-number" name="enrollment-number" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="class">Class:</label>
+      <input type="text" id="class" name="class" required>
+
+      <label for="branch">Branch:</label>
+      <select id="branch" name="branch" required>
+        <option value="">Select Branch</option>
+        <option value="CE">CE</option>
+        <option value="IT">IT</option>
+        <option value="CEAI">CEAI</option>
+        <option value="CSBS">CSBS</option>
+      </select>
+
+      <fieldset>
+        <legend>Semester:</legend>
+        <label><input type="radio" name="semester" value="5" required> 5</label>
+        <label><input type="radio" name="semester" value="6"> 6</label>
+        <label><input type="radio" name="semester" value="7"> 7</label>
+      </fieldset><br>
+
+      <label for="batch">Batch:</label>
+      <input type="text" id="batch" name="batch" required> -->
+
+      <label for="team-size">Number of Team Members:</label>
+      <select id="team-size" name="team-size" required>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+
+      <div id="team-members" class="team-members">
+        <h3>Team Members Details</h3>
+        <div id="team-member-details"></div>
+      </div>
+
+      <input type="submit" value="Register">
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var teamSize = document.getElementById('team-size').value;
+      updateTeamMembers(teamSize);
+    });
+  
+    document.getElementById('team-size').addEventListener('change', function() {
+      var teamSize = this.value;
+      updateTeamMembers(teamSize);
+    });
+  
+    function updateTeamMembers(teamSize) {
+      var teamMembersDiv = document.getElementById('team-members');
+      var teamMemberDetailsDiv = document.getElementById('team-member-details');
+      teamMemberDetailsDiv.innerHTML = '';
+  
+      if (teamSize == 3 || teamSize == 4) {
+        teamMembersDiv.classList.add('visible');
+        for (var i = 0; i < teamSize; i++) {
+          var memberNumber = i + 1;
+          var memberDiv = document.createElement('div');  
+          memberDiv.innerHTML = `
+            <h4>Team Member ${memberNumber}</h4>
+            <label for="member-name-${memberNumber}">Name:</label>
+            <input type="text" id="member-name-${memberNumber}" name="member-name-${memberNumber}" required>
+            <label for="member-enrollment-${memberNumber}">Enrollment Number:</label>
+            <input type="text" id="member-enrollment-${memberNumber}" name="member-enrollment-${memberNumber}" required>
+            <label for="member-email-${memberNumber}">Email:</label>
+            <input type="email" id="member-email-${memberNumber}" name="member-email-${memberNumber}" required>
+            <label for="member-class-${memberNumber}">Class:</label>
+            <input type="text" id="member-class-${memberNumber}" name="member-class-${memberNumber}" required>
+            <label for="member-branch-${memberNumber}">Branch:</label>
+            <select id="member-branch-${memberNumber}" name="member-branch-${memberNumber}" required>
+              <option value="">Select Branch</option>
+              <option value="CE">CE</option>
+              <option value="IT">IT</option>
+              <option value="CEAI">CEAI</option>
+              <option value="CSBS">CSBS</option>
+            </select>
+            <fieldset>
+              <legend>Semester:</legend>
+              <label><input type="radio" name="semester-${memberNumber}" value="5" required> 5</label>
+              <label><input type="radio" name="semester-${memberNumber}" value="6"> 6</label>
+              <label><input type="radio" name="semester-${memberNumber}" value="7"> 7</label>
+            </fieldset><br>
+            <label for="member-batch-${memberNumber}">Batch:</label>
+            <input type="text" id="member-batch-${memberNumber}" name="member-batch-${memberNumber}" required>
+          `;
+          teamMemberDetailsDiv.appendChild(memberDiv);
+        }
+      } else {
+        teamMembersDiv.classList.remove('visible');
+      }
+    }
+  </script>
+  
+</body>
+</html>
